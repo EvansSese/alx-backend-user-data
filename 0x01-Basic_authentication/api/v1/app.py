@@ -3,6 +3,7 @@
 Route module for the API
 """
 from os import getenv
+from typing import Tuple
 
 from api.v1.views import app_views
 from flask import Flask, jsonify, abort, request, Response
@@ -16,14 +17,14 @@ CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
 
 
 @app.errorhandler(404)
-def not_found(error) -> str:
+def not_found(error) -> tuple[Response, int]:
     """ Not found handler
     """
     return jsonify({"error": "Not found"}), 404
 
 
 @app.errorhandler(401)
-def unauthorized_error(error) -> str:
+def unauthorized_error(error) -> tuple[Response, int]:
     """ Unauthorized handler
     """
     return jsonify({"error": "Unauthorized"}), 401
@@ -31,5 +32,5 @@ def unauthorized_error(error) -> str:
 
 if __name__ == "__main__":
     host = getenv("API_HOST", "0.0.0.0")
-    port = getenv("API_PORT", "5000")
+    port = getenv("API_PORT", 5000)
     app.run(host=host, port=port)
