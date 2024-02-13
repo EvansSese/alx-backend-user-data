@@ -47,11 +47,8 @@ class Auth:
         """
         if request is None:
             return None
-        try:
-            val = request["Authorization"]
-            return val
-        except KeyError:
-            return None
+
+        return request.headers.get("Authorization", None)
 
     def current_user(self, request=None) -> TypeVar('User'):
         """Function to return the current user"""
