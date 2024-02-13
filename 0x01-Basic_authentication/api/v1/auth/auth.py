@@ -45,7 +45,13 @@ class Auth:
         """
         Function to retrurn auth headers
         """
-        return None
+        if request is None:
+            return None
+        try:
+            val = request["Authorization"]
+            return val
+        except KeyError:
+            return None
 
     def current_user(self, request=None) -> TypeVar('User'):
         """Function to return the current user"""
