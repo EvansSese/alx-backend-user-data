@@ -11,10 +11,17 @@ class Auth:
     """
 
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
+        """
+        Function to check if auth is required
+        """
         return False
 
     def authorization_header(self, request=None) -> str:
+        """
+        Function to retrurn auth headers
+        """
         return None
 
     def current_user(self, request=None) -> TypeVar('User'):
+        """Function to return the current user"""
         return None
