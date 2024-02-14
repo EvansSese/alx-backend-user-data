@@ -62,12 +62,14 @@ def before_request() -> str:
     if auth.authorization_header(request) is None:
         abort(401)
 
-    if auth.current_user(request) is None:
+    current_user = auth.current_user(request)
+    if current_user is None:
         abort(403)
-    request.current_user = auth.current_user(request)
+
+    request.current_user = current_user
 
 
 if __name__ == "__main__":
     host = getenv("API_HOST", "0.0.0.0")
-    port = getenv("API_PORT", "5000")
+    port = getenv("API_PORT", 5000)
     app.run(host=host, port=port)
