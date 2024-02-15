@@ -44,4 +44,3 @@ class SessionExpAuth(SessionAuth):
         if (create_time + time_delta) < datetime.now():
             return None
         return session_dictionary["user_id"]
-
