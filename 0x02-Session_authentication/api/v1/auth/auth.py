@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Auth class for Basic authentication"""
+from os import getenv
 from typing import List
 from typing_extensions import TypeVar
 from flask import request
@@ -9,6 +10,7 @@ class Auth:
     """
     Auth class to define auth functions
     """
+    SESSION_NAME = getenv("SESSION_NAME")
 
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
         """
@@ -53,3 +55,8 @@ class Auth:
     def current_user(self, request=None) -> TypeVar('User'):
         """Function to return the current user"""
         return None
+
+    def session_cookie(self, request=None):
+        if request is None:
+            return None
+        return request.cookies.get(self.SESSION_NAME)
