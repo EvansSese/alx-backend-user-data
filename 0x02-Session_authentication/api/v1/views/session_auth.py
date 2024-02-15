@@ -13,13 +13,13 @@ def session_login() -> str:
     user_email = request.form.get('email', None)
     user_password = request.form.get('password', None)
     if user_email is None or '':
-        return jsonify({"error":"email missing"}), 400
+        return jsonify({"error": "email missing"}), 400
     if user_password is None or '':
-        return jsonify({"error":"password missing"}), 400
+        return jsonify({"error": "password missing"}), 400
 
     is_valid_user = User.search({'email': user_email})
     if not is_valid_user:
-        return jsonify({"error":"no user found for this email"}), 404
+        return jsonify({"error": "no user found for this email"}), 404
 
     valid_user = is_valid_user[0]
 
