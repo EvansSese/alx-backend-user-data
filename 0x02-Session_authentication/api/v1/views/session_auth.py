@@ -23,7 +23,7 @@ def session_login() -> str:
 
     valid_user = is_valid_user[0]
 
-    if not is_valid_user.is_valid_password(user_password):
+    if not valid_user.is_valid_password(user_password):
         return jsonify({"error": "wrong password"}), 401
 
     from api.v1.app import auth
