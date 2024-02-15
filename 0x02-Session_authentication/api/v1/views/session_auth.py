@@ -29,7 +29,7 @@ def session_login() -> str:
     from api.v1.app import auth
     session_id = auth.create_session(valid_user.id)
     cookie_response = getenv('SESSION_NAME')
-    user_dict = jsonify(is_valid_user.to_json())
+    user_dict = jsonify(valid_user.to_json())
 
     user_dict.set_cookie(cookie_response, session_id)
     return user_dict
