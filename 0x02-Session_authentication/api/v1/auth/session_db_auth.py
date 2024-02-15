@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Session DB Authentication class"""
 from datetime import datetime, timedelta
-from session_auth import SessionAuth
+from api.v1.auth.session_auth import SessionAuth
 from models.user_session import UserSession
 
 
