@@ -32,5 +32,6 @@ class DB:
 
     def add_user(self, email: str, hashed_password: str) -> User:
         new_user = User(email=email, hashed_password=hashed_password)
-        self.__session.add(new_user)
+        self._session.add(new_user)
+        self._session.commit()
         return new_user
