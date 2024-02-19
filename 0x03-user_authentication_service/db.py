@@ -16,6 +16,8 @@ from user import Base, User
 class DB:
     """DB class
     """
+    user_keys = ['id', 'email', 'hashed_password',
+                 'session_id', 'reset_token']
 
     def __init__(self) -> None:
         """Initialize a new DB instance
@@ -41,15 +43,23 @@ class DB:
         self._session.commit()
         return new_user
 
-    def find_user_by(self, **kwargs: str) -> Type[User]:
+    def find_user_by(self, **kwargs) -> Type[User]:
         """Function to query for user by provided input"""
-        user_keys = ['id', 'email', 'hashed_password',
-                     'session_id', 'reset_token']
         for key in kwargs.keys():
-            if key not in user_keys:
+            if key not in self.user_keys:
                 raise InvalidRequestError
 
         result = self._session.query(User).filter_by(**kwargs).first()
         if result is None:
             raise NoResultFound
         return result
+
+    def update_user(self, user_id: int, **kwargs) -> None:
+        """Function to update a user"""
+        user_to_update = self.find_user_by(id=user_id)
+        for key, value in kwargs.items():
+            if key in self.user_keys:
+                setattr(user_to_update, key, value)
+            else:
+                raise ValueError
+        self._session.commit()
