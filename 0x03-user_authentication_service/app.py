@@ -2,9 +2,7 @@
 """Flass App Module"""
 import flask
 from flask import Flask, jsonify, request, abort
-from auth import Auth
 
-AUTH = Auth()
 app = Flask(__name__)
 
 
