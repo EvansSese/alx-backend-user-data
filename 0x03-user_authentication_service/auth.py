@@ -11,11 +11,3 @@ def _hash_password(password: str) -> bytes:
     """FUnction to hash the provided password"""
     hashed = hashpw(password.encode(), gensalt())
     return hashed
-
-
-class Auth:
-    """Auth class to interact with the authentication database.
-    """
-
-    def __init__(self):
-        self._db = DB()
