@@ -4,7 +4,6 @@
 from bcrypt import hashpw, gensalt
 from sqlalchemy.exc import NoResultFound
 from db import DB
-from user import User
 
 
 def _hash_password(password: str) -> bytes:
