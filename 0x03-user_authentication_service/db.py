@@ -20,8 +20,8 @@ class DB:
         """Initialize a new DB instance
         """
         self._engine = create_engine("sqlite:///a.db", echo=True)
-        Base.metadata.drop_all(self._engine)
-        Base.metadata.create_all(self._engine)
+        Base.metadata.drop_all(self._engine, echo=False)
+        Base.metadata.create_all(self._engine, echo=False)
         self.__session = None
 
     @property
