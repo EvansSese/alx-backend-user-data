@@ -40,8 +40,8 @@ class Auth:
         except NoResultFound:
             return False
 
-        user_password = str(user.hashed_password).encode()
-        encoded_password = password.encode()
+        user_password = str(user.hashed_password).encode('utf-8')
+        encoded_password = password.encode('utf-8')
 
         if bcrypt.checkpw(encoded_password, user_password):
             return True
