@@ -2,7 +2,6 @@
 """Auth module
 """
 from bcrypt import hashpw, gensalt
-from sqlalchemy.exc import NoResultFound
 from db import DB
 
 
