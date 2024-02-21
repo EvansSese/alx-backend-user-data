@@ -41,7 +41,7 @@ class DB:
         self._session.commit()
         return new_user
 
-    def find_user_by(self, **kwargs) -> Type[User]:
+    def find_user_by(self, **kwargs) -> User:
         """Function to query for user by provided input"""
         for key in kwargs.keys():
             if key not in self.user_keys:
