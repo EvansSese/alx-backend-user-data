@@ -7,6 +7,8 @@ from sqlalchemy.orm.exc import NoResultFound
 from db import DB
 from user import User
 
+db = DB()
+
 
 def _hash_password(password: str) -> bytes:
     """FUnction to hash the provided password"""
@@ -24,9 +26,9 @@ class Auth:
     def register_user(self, email: str, password: str) -> User:
         """FUnction to register user"""
         try:
-            user = DB.find_user_by(email=email)
+            user = db.find_user_by(email=email)
             raise ValueError(f'User {email} already exists')
         except NoResultFound:
             hashed_password = _hash_password(password)
-            user = DB.add_user(email, hashed_password)
+            user = db.add_user(email, hashed_password)
             return user
