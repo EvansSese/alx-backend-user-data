@@ -15,11 +15,11 @@ def index():
 
 
 @app.route('/users', methods=['POST'])
-def users(email, password):
+def users():
     """Register user if they don't exist"""
     try:
-        email = request.form["email"]
-        password = request.form["password"]
+        email = request.form['email']
+        password = request.form['password']
     except KeyError:
         abort(400)
 
