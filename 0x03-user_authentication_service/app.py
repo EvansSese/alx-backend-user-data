@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 """Flass App Module"""
-import flask
 from flask import Flask, jsonify, request, abort
 from auth import Auth
 
@@ -10,7 +9,8 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET'])
 def index():
-    """Return the index route"""
+    """Return the index route
+    """
     return jsonify({"message": "Bienvenue"})
 
 
