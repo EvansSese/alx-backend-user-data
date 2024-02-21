@@ -14,8 +14,7 @@ from user import Base, User
 class DB:
     """DB class
     """
-    user_keys = ['id', 'email', 'hashed_password',
-                 'session_id', 'reset_token']
+    column_names = User.__table__.columns.keys()
 
     def __init__(self) -> None:
         """Initialize a new DB instance
@@ -44,7 +43,7 @@ class DB:
     def find_user_by(self, **kwargs) -> User:
         """Function to query for user by provided input"""
         for key in kwargs.keys():
-            if key not in self.user_keys:
+            if key not in self.column_names:
                 raise InvalidRequestError
 
         result = self._session.query(User).filter_by(**kwargs).first()
@@ -56,7 +55,7 @@ class DB:
         """Function to update a user"""
         user_to_update = self.find_user_by(id=user_id)
         for key, value in kwargs.items():
-            if key in self.user_keys:
+            if key in self.column_names:
                 setattr(user_to_update, key, value)
             else:
                 raise ValueError
