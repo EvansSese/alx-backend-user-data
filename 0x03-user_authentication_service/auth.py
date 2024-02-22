@@ -2,6 +2,7 @@
 """Auth module
 """
 from bcrypt import hashpw, gensalt, checkpw
+from uuid import uuid4
 from sqlalchemy.orm.exc import NoResultFound
 from db import DB
 from user import User
@@ -11,6 +12,11 @@ def _hash_password(password: str) -> bytes:
     """FUnction to hash the provided password"""
     hashed = hashpw(password.encode('utf-8'), gensalt())
     return hashed
+
+
+def _generate_uuid() -> str:
+    """Generates a string rep of uuid"""
+    return str(uuid4())
 
 
 class Auth:
