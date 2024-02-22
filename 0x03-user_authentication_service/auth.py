@@ -43,7 +43,7 @@ class Auth:
         user_password = user.hashed_password
         encoded_password = password.encode('utf-8')
 
-        if checkpw(encoded_password, user_password):
+        if checkpw(user_password, encoded_password):
             return True
 
         return False
