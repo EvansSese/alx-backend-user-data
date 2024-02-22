@@ -87,7 +87,7 @@ def reset_password():
         abort(403)
 
 
-@app.route('/update_password', methods=['PUT'])
+@app.route('/reset_password', methods=['PUT'])
 def update_password():
     """Updates the user's password"""
     try:
@@ -102,5 +102,6 @@ def update_password():
     except ValueError:
         abort(403)
 
+
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port="5000")
+    app.run(host="0.0.0.0", port=5000)
