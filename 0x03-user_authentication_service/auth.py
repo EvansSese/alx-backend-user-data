@@ -53,3 +53,13 @@ class Auth:
             return True
 
         return False
+
+    def create_session(self, email: str) -> str:
+        """Creates a session id for a logged-in user"""
+        user = self._db.find_user_by(email=email)
+        user_session_id = str(_generate_uuid())
+        try:
+            self._db.update_user(user.id, session_id=user_session_id)
+            return user_session_id
+        except ValueError:
+            pass
