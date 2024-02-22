@@ -8,7 +8,7 @@ from db import DB
 from user import User
 
 
-def _hash_password(password: str) -> bytes:
+def _hash_password(password: str) -> str:
     """FUnction to hash the provided password"""
     hashed = hashpw(password.encode('utf-8'), gensalt())
     return hashed
@@ -46,8 +46,8 @@ class Auth:
         except NoResultFound:
             return False
 
-        user_password = bytes(user.hashed_password)
-        encoded_password = password.encode()
+        user_password = user.hashed_password
+        encoded_password = password.encode('utf-8')
 
         if checkpw(encoded_password, user_password):
             return True
