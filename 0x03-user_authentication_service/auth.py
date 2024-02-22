@@ -47,7 +47,7 @@ class Auth:
             return False
 
         user_password = user.hashed_password
-        provided_password = _hash_password(password)
+        provided_password = password.encode('utf-8')
 
         if checkpw(provided_password, user_password):
             return True
