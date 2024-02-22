@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 """Auth module
 """
-import bcrypt
-from bcrypt import hashpw, gensalt
+from bcrypt import hashpw, gensalt, checkpw
 from sqlalchemy.orm.exc import NoResultFound
 from db import DB
 from user import User
@@ -10,7 +9,7 @@ from user import User
 
 def _hash_password(password: str) -> bytes:
     """FUnction to hash the provided password"""
-    hashed = hashpw(password.encode(), gensalt())
+    hashed = hashpw(password.encode('utf-8'), gensalt())
     return hashed
 
 
@@ -41,10 +40,10 @@ class Auth:
         except NoResultFound:
             return False
 
-        user_password = bytes(user.hashed_password)
-        encoded_password = password.encode()
+        user_password = user.hashed_password
+        encoded_password = password.encode('utf-8')
 
-        if bcrypt.checkpw(encoded_password, user_password):
+        if checkpw(encoded_password, user_password):
             return True
 
         return False
