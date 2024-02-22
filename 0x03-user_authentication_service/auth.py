@@ -40,10 +40,10 @@ class Auth:
         except NoResultFound:
             return False
 
-        user_password = user.hashed_password
+        user_password = bytes(user.hashed_password)
         encoded_password = password.encode('utf-8')
 
-        if checkpw(user_password, encoded_password):
+        if checkpw(encoded_password, user_password):
             return True
 
         return False
